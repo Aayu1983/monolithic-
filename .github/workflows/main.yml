@@ -20,10 +20,10 @@ jobs:
       with: 
         node-manager: npm
         lock-file: package-lock.json
-    - name: build-npm-action
-      uses: anna-money/github-actions-npm@v4
-      with: 
-        target: CI=false build
+    - name: Build React App (ignore ESLint warnings)
+      run: npm run build
+      env:
+        CI: false
         
     
       
