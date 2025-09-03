@@ -64,7 +64,11 @@ jobs:
           script: |
             
             sudo mkdir -p /var/www/react-app
-            sudo cp -r /home/${{ secrets.VM_USERNAME }}/react-app/* /var/www/react-app/
+            # sudo cp -r /home/${{ secrets.VM_USERNAME }}/react-app/* /var/www/react-app/
+            sudo cp -r /home/${{ secrets.VM_USERNAME }}/react-app/* /var/www/html/
+
+            # Restart nginx
+            sudo systemctl restart nginx
 
             
    
