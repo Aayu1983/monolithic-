@@ -23,7 +23,7 @@ jobs:
     - name: build-npm-action
       uses: anna-money/github-actions-npm@v4
       with: 
-        target: build
+        target: CI=false build
         
     
       
