@@ -54,7 +54,7 @@ jobs:
           source: "build/*"
           target: "/home/${{ secrets.VM_USERNAME }}/react-app"
 
-      - name: Restart React Static Server
+      - name: Install serve and Restart React Static Server
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.VM_HOST }}
@@ -62,8 +62,11 @@ jobs:
           password: ${{ secrets.VM_PASSWORD }}
           port: 22
           script: |
-            pkill -f "serve -s /var/www/react-app" || true
-            nohup serve -s /var/www/react-app -l 3000 &
+            # Install serve if not already installed
+            which serve || npm install -g serve
+
+            # Kill previous serve process if running
+            pkill -f "serve -s /home/${{ secrets.VM_USERNAME }}/react-app" || true
 
    
           
