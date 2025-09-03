@@ -62,30 +62,11 @@ jobs:
           password: ${{ secrets.VM_PASSWORD }}
           port: 22
           script: |
-            sudo apt update
-            sudo apt install -y nginx
-            sudo systemctl enable nginx
-            sudo systemctl start nginx
-
+            
             sudo mkdir -p /var/www/react-app
             sudo cp -r /home/${{ secrets.VM_USERNAME }}/react-app/* /var/www/react-app/
 
-            sudo bash -c 'cat > /etc/nginx/sites-available/react-app <<EOF
-            server {
-                listen 80;
-                server_name _;
-                root /var/www/react-app;
-                index index.html;
-                location / {
-                    try_files \$uri /index.html;
-                }
-            }
-EOF'
-
-            sudo ln -sf /etc/nginx/sites-available/react-app /etc/nginx/sites-enabled/react-app
-            sudo rm -f /etc/nginx/sites-enabled/default
-            sudo nginx -t
-            sudo systemctl restart nginx 
+            
    
           
 
