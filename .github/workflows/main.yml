@@ -52,7 +52,7 @@ jobs:
           password: ${{ secrets.VM_PASSWORD }}
           port: 22
           source: "build/*"
-          target: "/var/www/react-app"
+          target: "/home/${{ secrets.VM_USERNAME }}/react-app"
 
       - name: Restart React Static Server
         uses: appleboy/ssh-action@v1.0.0
