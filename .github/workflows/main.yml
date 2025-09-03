@@ -1,9 +1,9 @@
-name: "new monolithic pipeline"
+name: "NewMmonolithic Pipeline"
 on: 
   workflow_dispatch:
 
 jobs:
-  terraform-init-plan:
+  buildstage:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -11,7 +11,20 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v5.0.0
-    - name: ci-nodejs-package
-      uses: grandmasterdev/github-action-ci-nodejs-package@v16.0.2
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '16'
+    - name: Install NodeJS Dependencies
+      uses: luisfuentech/gha-cache-deps@v1.2.3
+      with: 
+        node-manager: npm
+        lock-file: package-lock.json
+    - name: build-npm-action
+      uses: anna-money/github-actions-npm@v4
+      with: 
+        target: build
+        
+    
       
       
