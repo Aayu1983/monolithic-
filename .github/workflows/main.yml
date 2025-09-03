@@ -44,7 +44,7 @@ jobs:
          name: react-build
          path: build
      - name: Deploy to VM via SSH
-       uses: easingthemes/ssh-deploy@v2.1.5
+       uses: appleboy/scp-action@v0.1.4
        with:
          host: ${{ secrets.VM_HOST }}
          username: ${{ secrets.VM_USERNAME }}
