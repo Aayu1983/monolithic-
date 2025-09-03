@@ -45,14 +45,23 @@ jobs:
          path: build
      - name: Deploy to VM via SSH
        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
+       with:
          host: ${{ secrets.VM_HOST }}
          username: ${{ secrets.VM_USERNAME }}
          password: ${{ secrets.VM_PASSWORD }}
          script: |
             mkdir -p /var/www/react-app
             # (Optional) clean old build
-            rm -rf /var/www/react-app/*    
+            rm -rf /var/www/react-app/*   
+     - name: Restart Serve Static Server
+       uses: appleboy/ssh-action@v1.0.0
+       with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          script: |
+            pkill -f "serve -s /var/www/react-app" || true
+            nohup serve -s /var/www/react-app -l 3000 &
 
    
           
