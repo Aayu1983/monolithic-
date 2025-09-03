@@ -24,7 +24,11 @@ jobs:
       run: npm run build
       env:
         CI: false
-        
+    - name: Set Artifact Name
+      id: set-artifact-name
+      run: echo "name=react-build" >> $GITHUB_OUTPU
+      
+    
     
       
       
